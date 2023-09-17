@@ -15,7 +15,7 @@ kafka-console-producer --topic dataIn4 \
 --bootstrap-server broker:9092
 
 docker exec --interactive --tty broker \
-kafka-console-consumer --topic dataOut \
+kafka-console-consumer --topic dataOut0 \
 --bootstrap-server broker:9092
 
 docker exec -it broker bash
