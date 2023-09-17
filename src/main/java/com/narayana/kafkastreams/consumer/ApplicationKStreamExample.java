@@ -9,6 +9,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Printed;
 import org.apache.kafka.streams.kstream.Produced;
 import org.apache.kafka.streams.state.KeyValueStore;
 
@@ -41,13 +42,17 @@ public class ApplicationKStreamExample {
         final StreamsBuilder builder = new StreamsBuilder();
         final KStream<String, String> input = builder.stream("dataIn4");
         System.out.println(" buildKafkaStreams --> " + input);
-        input.flatMapValues(value -> Arrays.asList(value.split(" ")))
+        KStream<String, Long> countStream = input.flatMapValues(value -> Arrays.asList(value.split(" ")))
                 .groupBy((key, value) -> {
                     System.out.println(" key: " + key + ", value : " + value);
                     return value;
                 })
                 .count(Materialized.as("counts-store"))
-                .toStream().to("dataOut0", Produced.with(Serdes.String(),Serdes.Long()));
+                .toStream();
+        // Print data to the console
+        countStream.print(Printed.toSysOut());
+        // Send data to the output topic
+        countStream.to("dataOut0", Produced.with(Serdes.String(),Serdes.Long()));
         System.out.println(" buildKafkaStreams --> " + "out");
 
         Topology topology = builder.build();
