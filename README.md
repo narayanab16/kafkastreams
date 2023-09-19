@@ -2,6 +2,7 @@
 
 - Kafka streams used to build a Topology and Sub Topology of data transformations 
 like aggregations, KStream, KTable, state of the data etc
+# Added Kafka Producer App(KafkaProducerMain)
 # Kafka Console Producer, and Console Consumer 
 
 -    Prereq: Docker, DockerCompose, IntelliJ, Java 8+, Here i use JDK 18/20

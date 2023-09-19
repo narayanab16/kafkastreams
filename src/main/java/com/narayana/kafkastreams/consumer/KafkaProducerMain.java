@@ -18,7 +18,7 @@ public class KafkaProducerMain {
         String topicName = "dataIn4";
         Integer partition = 0;
         String key = "key";
-        String values[] = {"hello! nice to meet you", "test is successful", "welcome to the new home", "dummy assets", "source started", "target recahed", "how are you"};
+        String values[] = {"hello! nice to meet you", "test is successful", "welcome to the new home", "dummy assets", "source started", "target reached", "how are you", "smart coding"};
         int counter = 0;
         for(String value: values) {
             ProducerRecord producerRecord = new ProducerRecord(topicName, partition, key+counter, value);
