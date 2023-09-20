@@ -27,7 +27,7 @@ public class KafkaProducerMain {
         }
         kafkaProducer.flush();
         kafkaProducer.close();
-        System.out.println(" Total " + counter + " sent successfully");
+        System.out.println(" Total " + counter + " messages sent successfully");
         System.out.println(" Producer shutdown");
     }
 }
